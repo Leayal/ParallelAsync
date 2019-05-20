@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>System.Threading.Tasks</RootNamespace>
+    <AssemblyName>System.Threading.Tasks.ParallelAsync</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DocumentationFile>..\..\bin\Release\System.Threading.Tasks.ParallelAsync.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DocumentationFile>..\..\bin\Debug\System.Threading.Tasks.ParallelAsync.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\shared\ParallelAsync.cs" Link="ParallelAsync.cs" />
+    <Compile Include="..\shared\ParallelAsyncLoopResult.cs" Link="ParallelAsyncLoopResult.cs" />
+    <Compile Include="..\shared\ParallelAsyncLoopState.cs" Link="ParallelAsyncLoopState.cs" />
+  </ItemGroup>
+
+</Project>
