@@ -20,7 +20,7 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>A task that represents <seealso cref="ParallelAsyncLoopResult"/>.</returns>
-        public static Task<ParallelAsyncLoopResult> ForEach<T>(IEnumerable<T> source, Func<T, Task> body)
+        public static Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, Func<TSource, Task> body)
             => ForEach(source, defaultAsyncOptions, body);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace System.Threading.Tasks
                 }, parallelOptions.CancellationToken, TaskCreationOptions.LongRunning, TaskScheduler.Current ?? TaskScheduler.Default).Unwrap();
             }
 
-            await Task.WhenAll(waiting).ConfigureAwait(false);
+            await Task.WhenAll(waiting);
             if (parallelOptions.CancellationToken.IsCancellationRequested)
             {
                 return (new ParallelAsyncLoopResult(false, loopCount));
@@ -79,7 +79,7 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>A task that represents <seealso cref="ParallelAsyncLoopResult"/>.</returns>
-        public static Task<ParallelAsyncLoopResult> ForEach<T>(IEnumerable<T> source, Func<T, ParallelAsyncLoopState, Task> body)
+        public static Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, Func<TSource, ParallelAsyncLoopState, Task> body)
             => ForEach(source, defaultAsyncOptions, body);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>A task that represents <seealso cref="ParallelAsyncLoopResult"/>.</returns>
-        public static async Task<ParallelAsyncLoopResult> ForEach<T>(IEnumerable<T> source, ParallelOptions parallelOptions, Func<T, ParallelAsyncLoopState, Task> body)
+        public static async Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, ParallelOptions parallelOptions, Func<TSource, ParallelAsyncLoopState, Task> body)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -100,7 +100,7 @@ namespace System.Threading.Tasks
             if (body == null)
                 throw new ArgumentNullException(nameof(body));
 
-            ConcurrentBag<T> bag = new ConcurrentBag<T>(source);
+            ConcurrentBag<TSource> bag = new ConcurrentBag<TSource>(source);
 
             int parallelAllowance = Math.Min(parallelOptions.MaxDegreeOfParallelism, bag.Count);
 
@@ -127,7 +127,7 @@ namespace System.Threading.Tasks
                 }, parallelOptions.CancellationToken, TaskCreationOptions.LongRunning, TaskScheduler.Current ?? TaskScheduler.Default).Unwrap();
             }
 
-            await Task.WhenAll(waiting).ConfigureAwait(false);
+            await Task.WhenAll(waiting);
             if (loopState.IsStopped)
             {
                 return (new ParallelAsyncLoopResult(false));
