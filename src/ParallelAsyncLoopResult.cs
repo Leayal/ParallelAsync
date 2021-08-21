@@ -1,7 +1,7 @@
 ﻿namespace System.Threading.Tasks
 {
     /// <summary>Provides completion status on the execution of a <seealso cref="ParallelAsync"/> loop.</summary>
-    public struct ParallelAsyncLoopResult
+    public readonly struct ParallelAsyncLoopResult
     {
         /// <summary>
         /// Gets whether the loop ran to completion, such that all iterations of the loop were executed and the loop didn't receive a request to end prematurely.
