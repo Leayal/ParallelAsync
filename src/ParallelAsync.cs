@@ -20,8 +20,8 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>A task that represents <seealso cref="ParallelAsyncLoopResult"/>.</returns>
-        public static Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, Func<TSource, Task> body)
-            => ForEach(source, defaultAsyncOptions, body);
+        public static async Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, Func<TSource, Task> body)
+            => await ForEach(source, defaultAsyncOptions, body);
 
         /// <summary>
         /// Executes an asynchronously foreach operation on an <seealso cref="System.Collections.IEnumerable"/> in which iterations may run in parallel.
@@ -55,8 +55,8 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>A task that represents <seealso cref="ParallelAsyncLoopResult"/>.</returns>
-        public static Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, Func<TSource, ParallelAsyncLoopState, Task> body)
-            => ForEach(source, defaultAsyncOptions, body);
+        public static async Task<ParallelAsyncLoopResult> ForEach<TSource>(IEnumerable<TSource> source, Func<TSource, ParallelAsyncLoopState, Task> body)
+            => await ForEach(source, defaultAsyncOptions, body);
 
 #if NETSTANDARD2_1_OR_GREATER
         /// <summary>Executes an asynchronously foreach operation on an <seealso cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
@@ -65,10 +65,10 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>
-        /// This method will return  task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
         /// </returns>
-        public static Task ForEachAsync<TSource>(IAsyncEnumerable<TSource> source, Func<TSource, Task> body)
-            => ForEachAsync(source, defaultAsyncOptions, body);
+        public static async Task ForEachAsync<TSource>(IAsyncEnumerable<TSource> source, Func<TSource, Task> body)
+            => await ForEachAsync(source, defaultAsyncOptions, body);
 
         /// <summary>Executes an asynchronously foreach operation on an <seealso cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
@@ -77,7 +77,7 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>
-        /// This method will return  task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
         /// </returns>
         public static async Task ForEachAsync<TSource>(IAsyncEnumerable<TSource> source, ParallelOptions parallelOptions, Func<TSource, Task> body)
         {
@@ -111,10 +111,10 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>
-        /// This method will return  task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
         /// </returns>
-        public static Task ForEachAsync<TSource>(IAsyncEnumerable<TSource> source, Func<TSource, ParallelAsyncLoopState, Task> body)
-            => ForEachAsync(source, defaultAsyncOptions, body);
+        public static async Task ForEachAsync<TSource>(IAsyncEnumerable<TSource> source, Func<TSource, ParallelAsyncLoopState, Task> body)
+            => await ForEachAsync(source, defaultAsyncOptions, body);
 
         /// <summary>Executes an asynchronously foreach operation on an <seealso cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel, and the state of the loop can be monitored and manipulated.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
@@ -123,7 +123,7 @@ namespace System.Threading.Tasks
         /// <param name="body">The delegate that is invoked once per iteration.</param>
         /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
         /// <returns>
-        /// This method will return  task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the async iteration from <paramref name="source"/> and the all executions are both completed or when <seealso cref="ParallelAsyncLoopState.Break"/> or <seealso cref="ParallelAsyncLoopState.Stop"/> is called.
         /// </returns>
         public static async Task ForEachAsync<TSource>(IAsyncEnumerable<TSource> source, ParallelOptions parallelOptions, Func<TSource, ParallelAsyncLoopState, Task> body)
         {
@@ -151,6 +151,85 @@ namespace System.Threading.Tasks
             }
         }
 #endif
+
+        /// <summary>Executes an asynchronously foreach operation on an <seealso cref="BlockingCollection{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <typeparam name="TSource">The type of the data in the source.</typeparam>
+        /// <param name="real_time_source">An collection of data source.</param>
+        /// <param name="body">The delegate that is invoked once per iteration.</param>
+        /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
+        /// <remarks>The <paramref name="real_time_source"/> collection can be modified while the operations are on-going. However, the collection should call <seealso cref="BlockingCollection{TSource}.CompleteAdding"/> to avoid non-ending operation. The collection shouldn't be disposed before all the operations are completed.</remarks>
+        /// <returns>
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the collection from <paramref name="real_time_source"/> has <seealso cref="BlockingCollection{T}.IsAddingCompleted"/> is true and the all executions are both completed (or the executions are stopped).
+        /// </returns>
+        public static async Task<ParallelAsyncLoopResult> ForEachAsync<TSource>(BlockingCollection<TSource> real_time_source, Func<TSource, Task> body)
+            => await ForEachAsync(real_time_source, defaultAsyncOptions, body);
+
+        /// <summary>Executes an asynchronously foreach operation on an <seealso cref="BlockingCollection{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <typeparam name="TSource">The type of the data in the source.</typeparam>
+        /// <param name="real_time_source">An collection of data source.</param>
+        /// <param name="parallelOptions">An object that configures the behavior of this operation.</param>
+        /// <param name="body">The delegate that is invoked once per iteration.</param>
+        /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
+        /// <remarks>The <paramref name="real_time_source"/> collection can be modified while the operations are on-going. However, the collection should call <seealso cref="BlockingCollection{TSource}.CompleteAdding"/> to avoid non-ending operation. The collection shouldn't be disposed before all the operations are completed.</remarks>
+        /// <returns>
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the collection from <paramref name="real_time_source"/> has <seealso cref="BlockingCollection{T}.IsAddingCompleted"/> is true and the all executions are both completed (or the executions are stopped).
+        /// </returns>
+        public static async Task<ParallelAsyncLoopResult> ForEachAsync<TSource>(BlockingCollection<TSource> real_time_source, ParallelOptions parallelOptions, Func<TSource, Task> body)
+        {
+            if (real_time_source == null)
+                throw new ArgumentNullException(nameof(real_time_source));
+            if (parallelOptions == null)
+                throw new ArgumentNullException(nameof(parallelOptions));
+            if (body == null)
+                throw new ArgumentNullException(nameof(body));
+
+            if (real_time_source.IsCompleted || (real_time_source.IsAddingCompleted && real_time_source.Count == 0))
+            {
+                return new ParallelAsyncLoopResult(true);
+            }
+
+            return await InnerForEachAsyncWithoutState(real_time_source, parallelOptions, body);
+        }
+
+        /// <summary>Executes an asynchronously foreach operation on an <seealso cref="BlockingCollection{TSource}"/> in which iterations may run in parallel, and the state of the loop can be monitored and manipulated.</summary>/// <summary>Executes an asynchronously foreach operation on an <seealso cref="BlockingCollection{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <typeparam name="TSource">The type of the data in the source.</typeparam>
+        /// <param name="real_time_source">An collection of data source.</param>
+        /// <param name="body">The delegate that is invoked once per iteration.</param>
+        /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
+        /// <remarks>The <paramref name="real_time_source"/> collection can be modified while the operations are on-going. However, the collection should call <seealso cref="BlockingCollection{TSource}.CompleteAdding"/> to avoid non-ending operation. The collection shouldn't be disposed before all the operations are completed.</remarks>
+        /// <returns>
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the collection from <paramref name="real_time_source"/> has <seealso cref="BlockingCollection{T}.IsAddingCompleted"/> is true and the all executions are both completed (or the executions are stopped).
+        /// </returns>
+        public static async Task<ParallelAsyncLoopResult> ForEachAsync<TSource>(BlockingCollection<TSource> real_time_source, Func<TSource, ParallelAsyncLoopState, Task> body)
+            => await ForEachAsync(real_time_source, defaultAsyncOptions, body);
+
+        /// <summary>Executes an asynchronously foreach operation on an <seealso cref="BlockingCollection{TSource}"/> in which iterations may run in parallel, and the state of the loop can be monitored and manipulated.</summary>
+        /// <typeparam name="TSource">The type of the data in the source.</typeparam>
+        /// <param name="real_time_source">An collection of data source.</param>
+        /// <param name="parallelOptions">An object that configures the behavior of this operation.</param>
+        /// <param name="body">The delegate that is invoked once per iteration.</param>
+        /// <exception cref="ArgumentNullException">The source argument is null.-or-The body argument is null.</exception>
+        /// <remarks>The <paramref name="real_time_source"/> collection can be modified while the operations are on-going. However, the collection should call <seealso cref="BlockingCollection{TSource}.CompleteAdding"/> to avoid non-ending operation. The collection shouldn't be disposed before all the operations are completed.</remarks>
+        /// <returns>
+        /// This method will return task that represents <seealso cref="ParallelAsyncLoopResult"/> which will be completed when the collection from <paramref name="real_time_source"/> has <seealso cref="BlockingCollection{T}.IsAddingCompleted"/> is true and the all executions are both completed (or the executions are stopped).
+        /// </returns>
+        public static async Task<ParallelAsyncLoopResult> ForEachAsync<TSource>(BlockingCollection<TSource> real_time_source, ParallelOptions parallelOptions, Func<TSource, ParallelAsyncLoopState, Task> body)
+        {
+            if (real_time_source == null)
+                throw new ArgumentNullException(nameof(real_time_source));
+            if (parallelOptions == null)
+                throw new ArgumentNullException(nameof(parallelOptions));
+            if (body == null)
+                throw new ArgumentNullException(nameof(body));
+
+            if (real_time_source.IsCompleted || (real_time_source.IsAddingCompleted && real_time_source.Count == 0))
+            {
+                return new ParallelAsyncLoopResult(true);
+            }
+
+            var loopState = new ParallelAsyncLoopState();
+            return await InnerForEachAsync(real_time_source, parallelOptions, body, loopState);
+        }
 
         /// <summary>
         /// Executes an asynchronously foreach operation on an <seealso cref="System.Collections.IEnumerable"/> in which iterations may run in parallel, and the state of the loop can be monitored and manipulated.
@@ -190,12 +269,20 @@ namespace System.Threading.Tasks
                 {
                     waiting[i] = Task.Factory.StartNew(async () =>
                     {
-                        foreach (var item in real_time_source.GetConsumingEnumerable())
+                        while (!real_time_source.IsCompleted && !canceltoken.IsCancellationRequested)
                         {
-                            if (!canceltoken.IsCancellationRequested)
+                            if (real_time_source.TryTake(out var item))
                             {
                                 Interlocked.Increment(ref loopCount);
                                 await body.Invoke(item).ConfigureAwait(false);
+                            }
+                            else if (real_time_source.IsAddingCompleted)
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                await Task.Delay(30);
                             }
                         }
                     }, canceltoken, TaskCreationOptions.LongRunning, TaskScheduler.Current ?? TaskScheduler.Default).Unwrap();
